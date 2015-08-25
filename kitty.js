@@ -1,7 +1,8 @@
 var createObject, extendObject,
   sayHello, sayText, makeMammal,
   catPrototype, makeCat, garfieldCat,
-  dogPrototype, makeDog, cliffordDog;
+  dogPrototype, makeDog, cliffordDog,
+  humanPrototype, makeHuman, ryanHuman;
 // ** Utility function to set inheritance
 // Cross-browser method to inherit Object.create()
 // Newer js engines (v1.8.5+) support it natively
@@ -61,6 +62,13 @@ dogPrototype = makeMammal({
   hello_text : 'bark'
   });
 
+// prototype for all humans
+humanPrototype = makeMammal({
+  leg_count : 2,
+  arm_count : 2,
+  hello_text : 'hello'
+  });
+
 // ** cat constructor
 makeCat = function( arg_map ) {
   var cat = Object.create( catPrototype );
@@ -75,6 +83,13 @@ makeDog = function( arg_map ) {
   return dog;
   };
 
+// human constructor
+makeHuman = function( arg_map ) {
+  var human = Object.create( humanPrototype );
+  extendObject( human, arg_map );
+  return human;
+  };
+
 // ** cat instance
 garfieldCat = makeCat({
   name : 'Garfield',
@@ -87,6 +102,12 @@ cliffordDog = makeDog({
   fur_color : 'red'
   });
 
+// make new instance of human aka ME
+ryanHuman = makeHuman({
+  name : 'Ryan Postma',
+  human_age : 20
+  });
+
 // ** cat instance method invocations
 garfieldCat.say_hello();
 garfieldCat.say_text('Purr...');
@@ -94,4 +115,8 @@ garfieldCat.say_text('Purr...');
 // test new dog
 cliffordDog.say_hello();
 cliffordDog.say_text('Woof!!!');
+
+// test for new human instance
+ryanHuman.say_hello();
+ryanHuman.say_text('I am the man, the myth, and the legend!');
 
